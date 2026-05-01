@@ -20,10 +20,10 @@ public class Employee {
     private String name;
     private int age;
     private String avatar;
-    private String status;
+    private Boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "department_id")
     private Department department;
 
 

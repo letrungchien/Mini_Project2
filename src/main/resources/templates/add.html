@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<form th:action="@{/employees/save}"
+      th:object="${employee}"
+      method="post"
+      enctype="multipart/form-data">
+
+    <input type="text" th:field="*{name}" placeholder="Name"/><br>
+    <input type="number" th:field="*{age}" placeholder="Age"/><br>
+
+    <select th:field="*{department.id}">
+        <option value="">-- Chọn phòng ban --</option>
+        <option th:each="d : ${departments}"
+                th:value="${d.id}"
+                th:text="${d.name}">
+        </option>
+    </select><br>
+    <select th:field="*{status}">
+        <option value="">-- trang thai --</option>
+        <option value="true">Dang hoat dong</option>
+        <option value="false">Ngung hoat dong</option>
+
+    </select><br>
+
+    <input type="file" name="file"/><br>
+
+    <button type="submit">Thêm</button>
+</form>
+
+</body>
+</html>

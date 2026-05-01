@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity
 @NoArgsConstructor
@@ -21,6 +23,8 @@ public class Department {
     private String name;
     private String location;
 
+    @OneToMany(mappedBy = "department" , cascade = CascadeType.REMOVE)
+    private List<Employee> employees;
 
 
 }
