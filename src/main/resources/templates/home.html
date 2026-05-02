@@ -18,6 +18,17 @@
         border-radius: 50%;
     }
 </style>
+<form method="get" action="/">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm tên...">
+    <button type="submit">Search</button>
+</form>
+<a th:href="@{/(sortField='name', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'}, keyword=${keyword})}">
+    Sort Name
+</a>
+
+<a th:href="@{/(sortField='age', sortDir=${sortDir == 'asc' ? 'desc' : 'asc'}, keyword=${keyword})}">
+    Sort Age
+</a>
 <a name="" id="" class="btn btn-primary" href="/employees/add" role="button">Them</a>
 <table class="table table-striped table-inverse">
     <thead class="thead-inverse">
@@ -45,7 +56,27 @@
 </table>
 
 
+<div>
+    <!-- Previous -->
+    <a th:if="${currentPage > 0}"
+       th:href="@{/(page=${currentPage - 1}, keyword=${keyword}, sortField=${sortField}, sortDir=${sortDir})}">
+        Previous
+    </a>
 
+    <!-- Page numbers -->
+    <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+        <a th:href="@{/(page=${i}, keyword=${keyword}, sortField=${sortField}, sortDir=${sortDir})}"
+           th:text="${i + 1}"
+           th:classappend="${i == currentPage} ? 'active'">
+        </a>
+    </span>
+
+    <!-- Next -->
+    <a th:if="${currentPage < totalPages - 1}"
+       th:href="@{/(page=${currentPage + 1}, keyword=${keyword}, sortField=${sortField}, sortDir=${sortDir})}">
+        Next
+    </a>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
